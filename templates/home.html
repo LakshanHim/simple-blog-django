@@ -8,6 +8,19 @@
 {#    <link rel="stylesheet" href="{%  static 'css/style.css' %}">#}
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
+    <style>
+        .swiper-slide {
+            width: 80vw;
+            max-width: 400px;
+        }
+        @media (min-width: 768px) {
+            .swiper-slide {
+                width: 50vw;
+            }
+        }
+    </style>
 </head>
 
 <body class="bg-gray-100 flex flex-col min-h-screen">
@@ -15,7 +28,7 @@
         <div class="container mx-auto flex justify-between items-center">
             <div class="text-2xl font-bold text-blue-600 flex items-center gap-2">
                 <i data-lucide="home"></i>
-                <span>MyWebsite</span>
+                <span>WanderLab</span>
             </div>
             <ul class="hidden md:flex space-x-6 text-gray-700 font-medium">
                 <li class="hover:text-blue-600 cursor-pointer flex items-center gap-1"><i data-lucide="home"></i> Home
@@ -23,10 +36,9 @@
                 <li class="hover:text-blue-600 cursor-pointer flex items-center gap-1"><i data-lucide="info"></i>
                     <a href="/about">About</a>
                 </li>
-                <li class="hover:text-blue-600 cursor-pointer flex items-center gap-1"><i data-lucide="briefcase"></i>
-                    Services</li>
                 <li class="hover:text-blue-600 cursor-pointer flex items-center gap-1"><i data-lucide="phone"></i>
-                    Contact</li>
+                    <a href="/contact">Contact</a>
+                </li>
             </ul>
             <button class="md:hidden text-gray-700" id="menu-btn">
                 <i data-lucide="menu"></i>
@@ -34,9 +46,42 @@
         </div>
     </nav>
 
-    <div class="flex-grow flex justify-center items-center">
-    <img src="{% static 'image/beach.jpg' %}" alt="img" class="w-full h-auto" />
+    <div class="container mx-auto p-4">
+    <body class="flex justify-center items-center h-screen">
+        <div class="w-full h-full">
+            <div class="swiper mySwiper">
+                <div class="swiper-wrapper">
+                    {% for card in database %}
+                    <div class="swiper-slide relative">
+                        <img src="{{ card.image.url }}" class="w-full h-auto rounded-lg shadow-lg">
+                        <div class="absolute bottom-4 left-4 text-white">
+                            <h2 class="text-lg font-bold">{{card.name}}</h2>
+                            <p>Hawaii</p>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                <div class="swiper-pagination"></div>
+            </div>
+        </div>
+    </body>
 </div>
+
+
+
+
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+    {% for card in database %}
+        <div class="bg-white rounded-2xl shadow-lg p-4 m-2.5">
+            <img src="{{ card.image.url }}" alt="{{ card.name }}" class="w-full h-48 rounded-lg object-cover">
+            <h1 class="text-center font-bold text-2xl md:text-3xl lg:text-4xl m-2.5"><a href="{% url 'content' card.id %}">{{card.name}}</a></h1>
+            <p class="text-sm text-gray-600">{{ card.discription}}</p>
+        </div>
+    {% endfor %}
+</div>
+
+
 
 <footer class="bg-gray-800 text-white text-center p-4">
     <div class="container mx-auto">
@@ -50,6 +95,30 @@
 </footer>
     <script>
         lucide.createIcons();
+
+        var swiper = new Swiper(".mySwiper", {
+    effect: "coverflow",
+    grabCursor: true,
+    centeredSlides: true,
+    slidesPerView: "auto",
+    spaceBetween: 0,
+    loop: true,
+    autoplay: {
+        delay: 3000,
+        disableOnInteraction: false,
+    },
+    coverflowEffect: {
+        rotate: 20,
+        stretch: 0,
+        depth: 300,
+        modifier: 1,
+        slideShadows: true,
+    },
+    pagination: {
+        el: ".swiper-pagination",
+        clickable: true,
+    },
+});
     </script>
 </body>
 
