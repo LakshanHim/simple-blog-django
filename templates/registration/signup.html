@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+
+<body class="bg-gray-100 flex justify-center items-center h-screen">
+
+    <div class="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
+        <h3 class="text-2xl font-semibold text-center text-gray-800 mb-6">Sign Up</h3>
+
+        <form method="POST" class="space-y-4">
+            {% csrf_token %}
+            <div class="space-y-2">
+                {{ form.as_p }}
+            </div>
+
+            <button type="submit" class="w-full py-2 bg-blue-500 text-white font-semibold rounded-lg hover:bg-blue-600 transition duration-200">
+                Sign Up
+            </button>
+        </form>
+
+        <div class="mt-4 text-center">
+            <a href="{% url 'blog:login' %}" class="text-blue-500 hover:text-blue-600">Already have an account? Login</a>
+        </div>
+    </div>
+
+</body>
+
+</html>

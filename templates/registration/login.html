@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign In</title>
+    <style>
+        body {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(to right, #3b82f6, #9333ea);
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 350px;
+            text-align: center;
+        }
+        h2 {
+            color: #333;
+            margin-bottom: 15px;
+        }
+        .form-group {
+            text-align: left;
+            margin-bottom: 10px;
+        }
+        label {
+            display: block;
+            color: #555;
+            margin-bottom: 5px;
+        }
+        input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background: linear-gradient(to right, #3b82f6, #9333ea);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        button:hover {
+            opacity: 0.9;
+        }
+        .links {
+            margin-top: 15px;
+            font-size: 14px;
+            color: #666;
+        }
+        .social-links a {
+            display: inline-block;
+            margin: 5px;
+            padding: 10px;
+            border-radius: 50%;
+            color: white;
+            text-decoration: none;
+        }
+        .social-f { background: #1877f2; }
+        .social-g { background: #ea4335; }
+        .social-t { background: #1da1f2; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Sign In</h2>
+        <form method="POST">
+            {% csrf_token %}
+            <div class="form-group">
+                <label>Username</label>
+                <input type="text" name="username">
+            </div>
+            <div class="form-group">
+                <label>Password</label>
+                <input type="password" name="password">
+            </div>
+            <button type="submit">Sign In</button>
+        </form>
+        <div class="links">
+            <a href="#">Forgot password?</a>
+        </div>
+        <div class="social-links">
+            <a href="#" class="social-f">F</a>
+            <a href="#" class="social-g">G</a>
+            <a href="#" class="social-t">T</a>
+        </div>
+        <div class="links">
+            Don't have an account? <a href="{% url 'blog:authView' %}">Sign Up</a>
+        </div>
+    </div>
+</body>
+</html>
