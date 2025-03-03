@@ -5,3 +5,5 @@ class BlogForm(forms.ModelForm):
     class Meta:
         model = BlogTable
         fields = ['name', 'discription', 'image']
+
+

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Posts</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+
+<body class="bg-gray-100">
+    <nav class="bg-white shadow-md p-4" style="position: sticky; top: 0; z-index: 10;">
+        <div class="container mx-auto flex justify-between items-center">
+            <div class="text-2xl font-bold text-blue-600 flex items-center gap-2">
+                <i data-lucide="home"></i>
+                <span>WanderLab</span>
+            </div>
+            <ul class="hidden md:flex space-x-6 text-gray-700 font-medium">
+                <li class="hover:text-blue-600 cursor-pointer flex items-center gap-1"><i data-lucide="home"></i> Home
+                </li>
+                <li class="hover:text-blue-600 cursor-pointer flex items-center gap-1"><i data-lucide="info"></i>
+                    <a href="/about">About</a>
+                </li>
+                <li class="hover:text-blue-600 cursor-pointer flex items-center gap-1"><i data-lucide="phone"></i>
+                    <a href="/contact">Contact</a>
+                </li>
+            </ul>
+            <div class="hidden md:flex space-x-4">
+                <a href="/profile" class="bg-blue-600 text-white px-4 py-2 rounded-lg">Profile</a>
+                <a href="#" class="bg-blue-600 text-white px-4 py-2 rounded-lg"
+                    onclick="document.getElementById('logout-form').submit();">Logout</a>
+            </div>
+            <button class="md:hidden text-gray-700" id="menu-btn">
+                <i data-lucide="menu"></i>
+            </button>
+        </div>
+    </nav>
+
+
+
+    <div class="container mx-auto max-w-6xl">
+        {% if posts %}
+        <div class="grid md:grid-cols-3 sm:grid-cols-2 gap-6">
+            {% for post in posts %}
+            <div class="bg-white p-4 rounded-lg shadow-lg hover:shadow-xl transition duration-300">
+                <!-- Post Image -->
+                {% if post.image %}
+                <img src="{{ post.image.url }}" alt="{{ post.name }}" class="w-full h-40 object-cover rounded-lg mb-4">
+                {% else %}
+                <div class="w-full h-40 bg-gray-300 flex items-center justify-center rounded-lg mb-4">
+                    <span class="text-gray-500">No Image Available</span>
+                </div>
+                {% endif %}
+
+
+                <h3 class="text-xl font-semibold text-gray-900">{{ post.name }}</h3>
+                <p class="text-gray-600 text-sm mt-2">{{ post.discription }}</p>
+
+                <div class="mt-4 flex justify-between">
+                    <span class="text-gray-400 text-sm">Post ID: {{ post.id }}</span>
+                    <div class="space-x-4">
+                        <a href="{% url 'blog:edit-post' post.id %}" class="text-blue-500 hover:underline">Edit</a>
+                        <a href="{% url 'blog:delete-post' post.id %}" class="text-red-500 hover:underline">Delete</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <p class="text-gray-500 text-center mt-6">You haven't created any posts yet.</p>
+        {% endif %}
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script>
+        lucide.createIcons();
+        var swiper = new Swiper(".mySwiper", {
+            slidesPerView: 1,
+            spaceBetween: 10,
+            pagination: {
+                el: ".swiper-pagination",
+                clickable: true,
+            },
+            breakpoints: {
+                640: { slidesPerView: 2 },
+                1024: { slidesPerView: 3 }
+            }
+        });
+    </script>
+</body>
+
+</html>
