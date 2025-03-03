@@ -4,6 +4,6 @@ from .models import BlogTable
 class BlogForm(forms.ModelForm):
     class Meta:
         model = BlogTable
-        fields = ['name', 'discription', 'image']
+        fields = ['name', 'discription','category','image']
 
 

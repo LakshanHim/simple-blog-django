@@ -6,6 +6,7 @@ class BlogTable(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     name = models.CharField(max_length=100)
     discription = models.TextField(null=True, blank=True)
+    category = models.CharField(max_length=50)
     image = models.ImageField(default='beach.jpg', null=True, blank=True)
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False, unique=True)
 
