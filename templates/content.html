@@ -42,8 +42,12 @@
             <img src="{{ db.image.url }}" alt="Blog Image"
                 class="w-full max-w-md h-64 object-cover rounded-lg shadow-lg">
 
-            <h1 class="text-4xl font-semibold text-gray-800">{{ db.name }}</h1>
-            <h1 class="text-4xl font-semibold text-gray-800">{{ db.category }}</h1>
+            <h1 class="text-4xl font-semibold text-gray-800">
+                Name: <span class="font-normal text-gray-600">{{ db.name }}</span>
+            </h1>
+            <h1 class="text-4xl font-semibold text-gray-800">
+                Category: <span class="font-normal text-gray-600">{{ db.category }}</span>
+            </h1>
 
             <p class="text-lg text-gray-600 max-w-3xl mx-auto">{{ db.discription }}</p>
         </div>

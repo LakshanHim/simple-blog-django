@@ -59,13 +59,28 @@
                 <h3 class="text-xl font-semibold text-gray-900">{{ post.name }}</h3>
                 <p class="text-gray-600 text-sm mt-2">{{ post.discription }}</p>
 
-                <div class="mt-4 flex justify-between">
-                    <span class="text-gray-400 text-sm">Post ID: {{ post.id }}</span>
-                    <div class="space-x-4">
-                        <a href="{% url 'blog:edit-post' post.id %}" class="text-blue-500 hover:underline">Edit</a>
-                        <a href="{% url 'blog:delete-post' post.id %}" class="text-red-500 hover:underline">Delete</a>
-                    </div>
-                </div>
+{#                <div class="mt-4 flex justify-between">#}
+{#                    <span class="text-gray-400 text-sm">Post ID: {{ post.id }}</span>#}
+{#                    <div class="space-x-4">#}
+{#                        <a href="{% url 'blog:edit-post' post.id %}" class="text-blue-500 hover:underline">Edit</a>#}
+{#                        <a href="{% url 'blog:delete-post' post.id %}" class="text-red-500 hover:underline">Delete</a>#}
+{#                    </div>#}
+{#                </div>#}
+
+                    <div class="mt-4 flex justify-between items-center">
+    <span class="text-gray-400 text-sm">Post ID: {{ post.id }}</span>
+    <div class="flex space-x-2">
+        <a href="{% url 'blog:edit-post' post.id %}"
+           class="px-4 py-2 text-white bg-blue-500 hover:bg-blue-600 rounded-lg shadow-md transition duration-300">
+            Edit
+        </a>
+        <a href="{% url 'blog:delete-post' post.id %}"
+           class="px-4 py-2 text-white bg-red-500 hover:bg-red-600 rounded-lg shadow-md transition duration-300">
+            Delete
+        </a>
+    </div>
+</div>
+
             </div>
             {% endfor %}
         </div>
